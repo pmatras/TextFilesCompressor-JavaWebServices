@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema=org.apache.xerces.jaxp.validation.XMLSchemaFactory">
+    <servlet>
+        <servlet-name>ProcessFile</servlet-name>
+        <servlet-class>webtextfilescompressor.servlets.ProcessFile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewHistoryOfOperations</servlet-name>
+        <servlet-class>webtextfilescompressor.servlets.ViewHistoryOfOperations</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcessFile</servlet-name>
+        <url-pattern>/ProcessFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewHistoryOfOperations</servlet-name>
+        <url-pattern>/ViewHistoryOfOperations</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

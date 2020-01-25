@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservices.webservicestextfilescompressor/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservices.webservicestextfilescompressor/">
+
+<xs:element name="compressFile" type="tns:compressFile"/>
+
+<xs:element name="compressFileResponse" type="tns:compressFileResponse"/>
+
+<xs:element name="decompressFile" type="tns:decompressFile"/>
+
+<xs:element name="decompressFileResponse" type="tns:decompressFileResponse"/>
+
+<xs:element name="getOperationsHistory" type="tns:getOperationsHistory"/>
+
+<xs:element name="getOperationsHistoryResponse" type="tns:getOperationsHistoryResponse"/>
+
+<xs:complexType name="compressFile">
+<xs:sequence>
+<xs:element name="inputFile" type="xs:string" minOccurs="0"/>
+<xs:element name="outputFile" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="compressFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="decompressFile">
+<xs:sequence>
+<xs:element name="inputFile" type="xs:string" minOccurs="0"/>
+<xs:element name="outputFile" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="decompressFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOperationsHistory">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getOperationsHistoryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

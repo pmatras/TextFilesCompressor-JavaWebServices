@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web TextFilesCompressor</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+        <h1> Web Text Files Compressor </h1>
+        <br>
+        <h2> Compress/decompress file: </h2>
+        <form action="ProcessFile" method="GET">
+            <div> Enter working mode (compress/decompress): </div>
+            <br>
+            <input type="text" value="compress" name="mode" size="10"/>
+            <div> <br> Enter full path to input file with its extension (*.txt): </div>
+            <br>
+            <input type="text" value="test.txt" name="inputFile" size="100"/>
+            <br>
+            <div> <br> Enter full path to output file with its extension (*.txt): </div>
+            <br>
+            <input type="text" value="out.txt" name="outputFile" size="100"/>
+            <br>
+            <div>
+                <br>
+                <input type="submit" value="Process request"/> 
+            </div>
+            <hr>
+        </form>
+        <h2> View operations history: </h2>
+        <form action="ViewHistoryOfOperations" method="GET">
+            <input type="submit" value="View history"/>
+        </form>    
+</html>

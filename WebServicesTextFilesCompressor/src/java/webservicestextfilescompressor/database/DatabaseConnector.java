@@ -1,8 +1,11 @@
 package webservicestextfilescompressor.database;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 
 /**
@@ -57,5 +60,18 @@ public class DatabaseConnector {
        } catch (Exception e) {
             throw new RuntimeException(e);
        }
+   }
+   
+   public List<OperationsHistory> getAllRecordsFromDatabase() {
+       List<OperationsHistory> operationsHistoryList = new ArrayList<>();
+       
+       try {
+           Query query = entityManager.createNamedQuery("OperationsHistory.findAll");
+           operationsHistoryList = query.getResultList();
+       } catch(Exception e) {
+           System.err.println("Exception occured while getting all records from database, reason: " + e.getMessage());
+       }
+       
+       return operationsHistoryList;
    }
 }

@@ -24,6 +24,9 @@ public class DatabaseConnector {
             if(initializeConnectionWithDatabase()) {
                 System.out.println("Connection with database initialized successfully!");
             }
+            if(createTableInDatabase()) {
+                System.out.println("Table created successfully!");
+            }
         }
     }
     
@@ -38,6 +41,20 @@ public class DatabaseConnector {
         }
         
         return false;       
+    }
+    
+    private boolean createTableInDatabase() {
+        try {
+            userTransaction.begin();
+            entityManager.createNativeQuery("CREATE TABLE OperationsHistory (id int NOT NULL, mode VARCHAR(12),"
+                    + " inputFile VARCHAR(255), outputFile VARCHAR(255), PRIMARY KEY(id))");
+            userTransaction.commit();
+            return true;
+        } catch(Exception e) {
+            System.err.println("Exception occured while creating table in database, reason: " + e.getMessage());            
+        }
+        
+        return false;
     }
     
     public boolean insertIntoDatabase(final String mode, final String inputFileName, final String outputFileName) {

@@ -12,6 +12,31 @@ import javax.transaction.UserTransaction;
  */
 public class DatabaseConnector {
     
+    private static Context context = null;
+    private static UserTransaction userTransaction = null;
+    private static EntityManager entityManager = null;
+    
+    public DatabaseConnector() {
+        if(entityManager == null) {
+            if(initializeConnectionWithDatabase()) {
+                System.out.println("Connection with database initialized successfully!");
+            }
+        }
+    }
+    
+    private boolean initializeConnectionWithDatabase() {
+        try {
+            context = new InitialContext();
+            userTransaction = (UserTransaction) context.lookup("java:comp/env/UserTransaction");
+            entityManager = (EntityManager) context.lookup("java:comp/env/persistence/LogicalName");   
+            return true;
+        } catch(Exception e) {
+            System.err.println("Exception occured, while initialize connection with database, reason: " + e.getMessage());
+        }
+        
+        return false;       
+    }
+    
     public boolean insertIntoDatabase(final String mode, final String inputFileName, final String outputFileName) {
         OperationsHistory operationsHistory = new OperationsHistory(mode, inputFileName, outputFileName);
         try {
@@ -19,16 +44,14 @@ public class DatabaseConnector {
             return true;            
         } catch(Exception e) {
             System.err.println("Exception occured while inserting data into database, reason: " + e.getMessage());
-            return false;
         }
+        
+        return false;
     }
-
+    
    public void persist(Object object) {  
        try {
-           Context context = new InitialContext();
-           UserTransaction userTransaction = (UserTransaction) context.lookup("java:comp/env/UserTransaction");
-           userTransaction.begin();
-           EntityManager entityManager = (EntityManager) context.lookup("java:comp/env/persistence/LogicalName");
+           userTransaction.begin();           
            entityManager.persist(object);
            userTransaction.commit();
        } catch (Exception e) {

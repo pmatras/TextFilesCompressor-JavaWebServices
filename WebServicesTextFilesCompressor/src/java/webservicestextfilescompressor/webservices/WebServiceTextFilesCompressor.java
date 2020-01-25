@@ -31,7 +31,9 @@ public class WebServiceTextFilesCompressor {
         try {
             if(compressor.compressFile()) {
                 message += inputFile + " was successfuly compressed into file " + outputFile;
-                databaseConnector.insertIntoDatabase(Mode.COMPRESS.toString().toLowerCase(), inputFile, outputFile);
+                if(databaseConnector.insertIntoDatabase(Mode.COMPRESS.toString().toLowerCase(), inputFile, outputFile)) {
+                    System.out.println("Data about compress operation successfully inserted into database!");
+                }
             }               
         } catch(WrongFilePassedException e) {
             message += "File to compress not found: " + e.getMessage();                  
@@ -54,7 +56,9 @@ public class WebServiceTextFilesCompressor {
         try {
             if(decompressor.decompressFile()) {
                 message += inputFile + " was successfuly decompressed into file " + outputFile;
-                databaseConnector.insertIntoDatabase(Mode.DECOMPRESS.toString().toLowerCase(), inputFile, outputFile);
+                if(databaseConnector.insertIntoDatabase(Mode.DECOMPRESS.toString().toLowerCase(), inputFile, outputFile)) {
+                    System.out.println("Data about decompress operation successfully inserted into database!");
+                }
             }               
         } catch(WrongFilePassedException e) {
             message += "File to decompress not found: " + e.getMessage();                  

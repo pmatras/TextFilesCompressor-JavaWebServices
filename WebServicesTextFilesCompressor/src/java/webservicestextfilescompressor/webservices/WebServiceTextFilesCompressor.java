@@ -1,10 +1,13 @@
 package webservicestextfilescompressor.webservices;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import webservicestextfilescompressor.database.DatabaseConnector;
+import webservicestextfilescompressor.database.OperationsHistory;
 import webservicestextfilescompressor.webmodel.Mode;
 import webservicestextfilescompressor.webmodel.SingleInstanceOfWebModelGuard;
 import webservicestextfilescompressor.webmodel.WebFilesCompressor;
@@ -68,4 +71,22 @@ public class WebServiceTextFilesCompressor {
         
         return message;
     }
+    
+    /**
+     * Web service operation which serves ability to get history of operations from database
+     */
+    @WebMethod(operationName = "getOperationsHistory")
+    public List<String> getOperationsHistory() {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        List<OperationsHistory> operations = databaseConnector.getAllRecordsFromDatabase();
+        List<String> operationsHistory = new ArrayList<>();
+        
+        for(OperationsHistory operation : operations) {           
+            operationsHistory.add(operation.getMode());
+            operationsHistory.add(operation.getInputfile());
+            operationsHistory.add(operation.getOutputfile());         
+        }
+        
+        return operationsHistory;
+    }    
 }

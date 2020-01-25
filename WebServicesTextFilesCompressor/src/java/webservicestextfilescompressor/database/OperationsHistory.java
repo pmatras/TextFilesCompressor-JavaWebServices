@@ -5,6 +5,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,8 +32,8 @@ public class OperationsHistory implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    @GeneratedValue
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
@@ -46,8 +47,14 @@ public class OperationsHistory implements Serializable {
     @Size(max = 255)
     @Column(name = "OUTPUTFILE")
     private String outputfile;
+    
+    public OperationsHistory() {        
+    }
 
-    public OperationsHistory() {
+    public OperationsHistory(final String mode, final String inputFile, final String outputFile) {
+        this.mode = mode;
+        this.inputfile = inputFile;
+        this.outputfile = outputFile;
     }
 
     public OperationsHistory(Integer id) {
@@ -110,5 +117,5 @@ public class OperationsHistory implements Serializable {
     public String toString() {
         return "database.Operationshistory[ id=" + id + " ]";
     }
-    
+
 }

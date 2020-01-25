@@ -22,8 +22,8 @@ public class WebServiceTextFilesCompressor {
     /**
      * Web service operation which serves ability to compress files and also inserts history of compress operations into database
      */
-    @WebMethod(operationName = "CompressFile")
-    public String CompressFile(@WebParam(name = "inputFile") final String inputFile, @WebParam(name = "outputFile") final String outputFile) {
+    @WebMethod(operationName = "compressFile")
+    public String compressFile(@WebParam(name = "inputFile") final String inputFile, @WebParam(name = "outputFile") final String outputFile) {
         WebFilesCompressor compressor = SingleInstanceOfWebModelGuard.getFilesCompressor(inputFile, "", outputFile);
         DatabaseConnector databaseConnector = new DatabaseConnector();
         
@@ -45,8 +45,8 @@ public class WebServiceTextFilesCompressor {
     /**
      * Web service operation which serves ability to decompress files and also inserts history of decompress operations into database
      */
-    @WebMethod(operationName = "DecompressFile")
-    public String DecompressFile(@WebParam(name = "inputFile") final String inputFile, @WebParam(name = "outputFile") final String outputFile) {
+    @WebMethod(operationName = "decompressFile")
+    public String decompressFile(@WebParam(name = "inputFile") final String inputFile, @WebParam(name = "outputFile") final String outputFile) {
         WebFilesCompressor decompressor = SingleInstanceOfWebModelGuard.getFilesCompressor("", inputFile, outputFile);
         DatabaseConnector databaseConnector = new DatabaseConnector();
         

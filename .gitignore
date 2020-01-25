@@ -23,3 +23,6 @@
 hs_err_pid*
 /WebServicesTextFilesCompressor/nbproject/private/
 /WebServicesTextFilesCompressor/build/
+/WebServicesTextFilesCompressorClient/nbproject/private/
+/WebServicesTextFilesCompressorClient/build/
+/WebServicesTextFilesCompressor/dist/

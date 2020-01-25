@@ -95,7 +95,11 @@ public class ViewHistoryOfOperations extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-
+    
+    /**
+     * Method for obtaining all records from database, which uses functionality served by WebService
+     * @return 
+     */
     private List<String> getOperationsHistory() {       
         webtextfilescompressor.webservicesclient.WebServiceTextFilesCompressor port = service.getWebServiceTextFilesCompressorPort();
         

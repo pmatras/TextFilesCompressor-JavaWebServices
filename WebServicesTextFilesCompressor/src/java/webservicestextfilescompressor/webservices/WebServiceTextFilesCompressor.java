@@ -41,4 +41,27 @@ public class WebServiceTextFilesCompressor {
         
         return message;
     }
+
+    /**
+     * Web service operation which serves ability to decompress files and also inserts history of decompress operations into database
+     */
+    @WebMethod(operationName = "DecompressFile")
+    public String DecompressFile(@WebParam(name = "inputFile") final String inputFile, @WebParam(name = "outputFile") final String outputFile) {
+        WebFilesCompressor decompressor = SingleInstanceOfWebModelGuard.getFilesCompressor("", inputFile, outputFile);
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        
+        String message = "";
+        try {
+            if(decompressor.decompressFile()) {
+                message += inputFile + " was successfuly decompressed into file " + outputFile;
+                databaseConnector.insertIntoDatabase(Mode.DECOMPRESS.toString().toLowerCase(), inputFile, outputFile);
+            }               
+        } catch(WrongFilePassedException e) {
+            message += "File to decompress not found: " + e.getMessage();                  
+        } catch(IOException e) {
+            message += "Problem occured while decompressing file: " + e.getMessage();    
+        }
+        
+        return message;
+    }
 }
